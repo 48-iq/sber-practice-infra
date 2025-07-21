@@ -2,7 +2,7 @@ services:
   sber-dining-hall-front:
     image: ghcr.io/48-iq/sber-dining-hall-front:v0.0.1
     ports: 
-      - 8081:8080
+      - 443:8080
     networks:
       - sber-dining-hall
 
