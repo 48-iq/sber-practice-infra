@@ -1,12 +1,9 @@
 services:
-  sber-dining-hall-front:
-    image: ghcr.io/48-iq/sber-dining-hall-front:v0.0.1
-    ports: 
-      - 443:8080
-    networks:
-      - sber-dining-hall
-
   
+  sbertorgibot:
+    image: ghcr.io/nousees/sbertorgibot:latest
+    restart: unless-stopped
 
-networks:
-  sber-dining-hall:
+  fsspbot:
+    image: ghcr.io/danila2605/fsspbot:latest
+    restart: unless-stopped
