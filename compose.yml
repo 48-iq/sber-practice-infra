@@ -6,7 +6,7 @@ services:
       - TORGI_BOT_TOKEN=${TORGI_BOT_TELEGRAM_TOKEN}
       - TORGI_BOT_USERNAME=${TORGI_BOT_TELEGRAM_USERNAME}
   fsspbot:
-    image: ghcr.io/danila2605/fsspbot:v0.0.9
+    image: ghcr.io/danila2605/fsspbot:v0.0.10
     restart: unless-stopped
     environment:
       - FSSP_BOT_TOKEN=${FSSP_BOT_TELEGRAM_TOKEN}
