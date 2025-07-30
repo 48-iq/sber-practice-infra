@@ -1,9 +1,9 @@
 services:
-  
   sbertorgibot:
     image: ghcr.io/nousees/sbertorgibot:latest
     restart: unless-stopped
-
+    env_file: .env
   fsspbot:
     image: ghcr.io/danila2605/fsspbot:latest
     restart: unless-stopped
+    env_file: .env
