@@ -1,9 +1,13 @@
 services:
   sbertorgibot:
-    image: ghcr.io/nousees/sbertorgibot:v0.0.2
+    image: ghcr.io/nousees/sbertorgibot:v0.0.3
     restart: unless-stopped
-    env_file: .env
+    environment:
+      - TORGI_BOT_TOKEN=${TORGI_BOT_TELEGRAM_TOKEN}
+      - TORGI_BOT_USERNAME=${TORGI_BOT_TELEGRAM_USERNAME}
   fsspbot:
-    image: ghcr.io/danila2605/fsspbot:v0.0.6
+    image: ghcr.io/danila2605/fsspbot:v0.0.7
     restart: unless-stopped
-    env_file: .env
+    environment:
+      - FSSP_BOT_TOKEN=${FSSP_BOT_TELEGRAM_TOKEN}
+      - FSSP_BOT_USERNAME=${FSSP_BOT_TELEGRAM_USERNAME}
