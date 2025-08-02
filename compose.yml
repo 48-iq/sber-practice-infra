@@ -11,3 +11,34 @@ services:
     environment:
       - FSSP_BOT_TOKEN=${FSSP_BOT_TELEGRAM_TOKEN}
       - FSSP_BOT_USERNAME=${FSSP_BOT_TELEGRAM_USERNAME}
+  
+  dininghallbot:
+    image: ghcr.io/48-iq/dining-hall-bot:latest
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB_URL=${POSTGRES_DB_URL}
+      - BOT_TOKEN=${DHB_BOT_TELEGRAM_TOKEN}
+      - BOT_USERNAME=${DHB_BOT_TELEGRAM_USERNAME}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    driver: bridge
