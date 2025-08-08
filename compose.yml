@@ -19,6 +19,7 @@ services:
       - POSTGRES_DB_URL=${POSTGRES_DB_URL}
       - BOT_TOKEN=${DHB_BOT_TELEGRAM_TOKEN}
       - BOT_USERNAME=${DHB_BOT_TELEGRAM_USERNAME}
+      - BOT_ADMIN_CHAT_ID=${DHB_BOT_ADMIN_CHAT_ID}
     depends_on:
       postgres:
         condition: service_healthy
