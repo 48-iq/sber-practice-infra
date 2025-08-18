@@ -11,12 +11,26 @@ services:
     environment:
       - FSSP_BOT_TOKEN=${FSSP_BOT_TELEGRAM_TOKEN}
       - FSSP_BOT_USERNAME=${FSSP_BOT_TELEGRAM_USERNAME}
+  egrz-bot:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      BOT_USERNAME: ${EGRZ_BOT_TELEGRAM_USERNAME}
+      BOT_TOKEN: ${EGRZ_BOT_TELEGRAM_TOKEN}
+      DB_URL: jdbc:postgresql://postgres:5432/egrz
+      BOT_ADMIN_CHAT_ID: ${EGRZ_BOT_ADMIN_CHAT_ID}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - default
   
   dininghallbot:
     image: ghcr.io/48-iq/dining-hall-bot:latest
     restart: unless-stopped
     environment:
-      - POSTGRES_DB_URL=${POSTGRES_DB_URL}
+      - POSTGRES_DB_URL=jdbc:postgresql://postgres:5432/dining
       - BOT_TOKEN=${DHB_BOT_TELEGRAM_TOKEN}
       - BOT_USERNAME=${DHB_BOT_TELEGRAM_USERNAME}
       - BOT_ADMIN_CHAT_ID=${DHB_BOT_ADMIN_CHAT_ID}
@@ -31,7 +45,6 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     networks:
@@ -41,6 +54,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 networks:
   default:
