@@ -12,7 +12,7 @@ services:
       - FSSP_BOT_TOKEN=${FSSP_BOT_TELEGRAM_TOKEN}
       - FSSP_BOT_USERNAME=${FSSP_BOT_TELEGRAM_USERNAME}
   egrz-bot:
-    build: .
+    image: ghcr.io/48-iq/egrz-bot:latest
     ports:
       - "8080:8080"
     environment:
