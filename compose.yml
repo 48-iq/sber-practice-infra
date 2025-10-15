@@ -1,16 +1,4 @@
 services:
-  sbertorgibot:
-    image: ghcr.io/nousees/sbertorgibot:v0.0.3
-    restart: unless-stopped
-    environment:
-      - TORGI_BOT_TOKEN=${TORGI_BOT_TELEGRAM_TOKEN}
-      - TORGI_BOT_USERNAME=${TORGI_BOT_TELEGRAM_USERNAME}
-  fsspbot:
-    image: ghcr.io/danila2605/fsspbot:v0.0.12
-    restart: unless-stopped
-    environment:
-      - FSSP_BOT_TOKEN=${FSSP_BOT_TELEGRAM_TOKEN}
-      - FSSP_BOT_USERNAME=${FSSP_BOT_TELEGRAM_USERNAME}
   egrz-bot:
     image: ghcr.io/48-iq/egrz-bot:latest
     ports:
@@ -20,20 +8,6 @@ services:
       BOT_TOKEN: ${EGRZ_BOT_TELEGRAM_TOKEN}
       DB_URL: jdbc:postgresql://postgres:5432/egrz
       BOT_ADMIN_CHAT_ID: ${EGRZ_BOT_ADMIN_CHAT_ID}
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - default
-  
-  dininghallbot:
-    image: ghcr.io/48-iq/dining-hall-bot:latest
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB_URL=jdbc:postgresql://postgres:5432/dining
-      - BOT_TOKEN=${DHB_BOT_TELEGRAM_TOKEN}
-      - BOT_USERNAME=${DHB_BOT_TELEGRAM_USERNAME}
-      - BOT_ADMIN_CHAT_ID=${DHB_BOT_ADMIN_CHAT_ID}
     depends_on:
       postgres:
         condition: service_healthy
